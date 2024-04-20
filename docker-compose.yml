@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    container_name: dckpst_db
+    image: postgres:16.2
+    volumes:
+      - dckpst_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=dummydbdckr00
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/dummydbdckr00
+    ports:
+      - "5432:5432"
+
+volumes:
+  dckpst_db: {}
+
+
+# volumes:
+#   dckpst_db: {}
+  # dckpst:
+  #   container_name: dckpst
+  #   image: dckpst
+  #   build: .
+  #   ports:
+  #     - 8080:8080
+  #   enviroment: 
+  #     - spring.profiles.active=dev
+  #   depends_on:
+  #     - postgres

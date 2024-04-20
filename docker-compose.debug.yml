@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  dckpst:
+    image: dckpst
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y
+    ports:
+      - 8080:8080
+      - 5432:5432
+      # 5005:5005
